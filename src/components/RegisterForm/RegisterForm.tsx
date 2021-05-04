@@ -1,11 +1,48 @@
 import React from 'react';
+import {
+    Formik,
+    FormikHelpers,
+    FormikProps,
+    Form,
+    Field,
+    FieldProps,
+  }from "formik";
+import axios from "axios";
+  interface RegisterFormValues {
+    username: string;
+    password?: string;
+    email: string;
+  }
+  export default class RegisterForm extends React.Component<{emitter:any},{}> {
+    _formDefaultValues:RegisterFormValues  
+    constructor(props:any){
+          super(props)
+          this._formDefaultValues = {username:"",email:"",password:""}
+      }
+      onRegisterFormSubmit(values:RegisterFormValues,actions:any){
+          alert(JSON.stringify(values))
 
-
-export default class RegisterForm extends React.Component<{emitter:any},{}> {
+      }
   render(){
     return (
     <div className="RegisterForm">
         <p>Register</p>
+        <Formik
+         initialValues={this._formDefaultValues}
+         onSubmit={(values,actions)=>{this.onRegisterFormSubmit(values,actions)}}
+       >
+         <Form>
+           <label htmlFor="username">Username</label>
+           <Field id="username" name="username" placeholder="John Doe" />
+
+           <label htmlFor="email">Email</label>
+           <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
+
+           <label htmlFor="password">Password</label>
+           <Field id="password" name="password" placeholder="Strong password" />
+           <button type="submit">Register</button>
+         </Form>
+       </Formik>
         <button onClick={()=>{this.props.emitter.emit("toogleAuthForm")}}>i want to login</button>
     </div>
   );
