@@ -6,7 +6,6 @@ import {
   }from "formik";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { getCsrf } from '../../utils/csrf';
   interface LoginFormValues {
     email: string;
     password?: string;
