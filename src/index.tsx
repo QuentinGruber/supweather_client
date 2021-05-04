@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import Home from './routes/Home/Home';
 import Landing from './routes/Landing/Landing';
 import Detail from './routes/Detail/Detail';
+require('dotenv').config()
 
 ReactDOM.render(
   <Router>
