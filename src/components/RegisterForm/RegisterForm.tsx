@@ -1,11 +1,8 @@
 import React from 'react';
 import {
     Formik,
-    FormikHelpers,
-    FormikProps,
     Form,
     Field,
-    FieldProps,
   }from "formik";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
@@ -15,9 +12,6 @@ import axios from "axios";
     email: string;
   }
 
-  interface props {
-    emitter:any
-  }
 class RegisterForm extends React.Component<{emitter:any},{}> {
     _formDefaultValues:RegisterFormValues  
     constructor(props:any){
