@@ -7,21 +7,31 @@ import {
     Field,
     FieldProps,
   }from "formik";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
   interface RegisterFormValues {
     username: string;
     password?: string;
     email: string;
   }
-  export default class RegisterForm extends React.Component<{emitter:any},{}> {
+
+  interface props {
+    emitter:any
+  }
+class RegisterForm extends React.Component<{emitter:any},{}> {
     _formDefaultValues:RegisterFormValues  
     constructor(props:any){
           super(props)
           this._formDefaultValues = {username:"",email:"",password:""}
       }
-      onRegisterFormSubmit(values:RegisterFormValues,actions:any){
-          alert(JSON.stringify(values))
-
+      async onRegisterFormSubmit(values:RegisterFormValues,actions:any){
+          const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/sign_up`,values,{withCredentials:true})
+          if(response.status === 200){
+            (this.props as any).history.push("/home")
+          }
+          else{
+            alert("error while registering, try again in a few minutes...")
+          }
       }
   render(){
     return (
@@ -48,3 +58,4 @@ import axios from "axios";
   );
     }
 }
+export default (withRouter as any)(RegisterForm)
