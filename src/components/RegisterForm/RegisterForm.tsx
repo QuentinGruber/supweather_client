@@ -19,13 +19,12 @@ class RegisterForm extends React.Component<{emitter:any},{}> {
           this._formDefaultValues = {username:"",email:"",password:""}
       }
       async onRegisterFormSubmit(values:RegisterFormValues,actions:any){
-          const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/sign_up`,values,{withCredentials:true})
-          if(response.status === 200){
-            (this.props as any).history.push("/home")
-          }
-          else{
-            alert("error while registering, try again in a few minutes...")
-          }
+        try {
+          await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/sign_up`,values,{withCredentials:true});
+          (this.props as any).history.push("/home");
+        } catch (e) {
+            alert(`${e.response.data.error}`)
+        }
       }
   render(){
     return (
