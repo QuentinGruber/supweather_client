@@ -1,12 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 
 
-function RegisterForm() {
-  return (
+export default class RegisterForm extends React.Component<{emitter:any},{}> {
+  render(){
+    return (
     <div className="RegisterForm">
+        <p>Register</p>
+        <button onClick={()=>{this.props.emitter.emit("toogleAuthForm")}}>i want to login</button>
     </div>
   );
+    }
 }
-
-export default RegisterForm;
