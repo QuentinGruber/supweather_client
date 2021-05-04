@@ -20,10 +20,15 @@ class RegisterForm extends React.Component<{emitter:any},{}> {
       }
       async onRegisterFormSubmit(values:RegisterFormValues,actions:any){
         try {
-          await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/sign_up`,values,{withCredentials:true});
+          const {data:{csrfToken}} = await axios.get(`${process.env.REACT_APP_SERVER_URL}/csrf`,{withCredentials:true});
+          await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/sign_up`,values,{ headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "xsrf-token": csrfToken,
+        },withCredentials:true});
           (this.props as any).history.push("/home");
         } catch (e) {
-            alert(`${e.response.data.error}`)
+            alert(`${e.response?.data.error}`)
         }
       }
   render(){
