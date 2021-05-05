@@ -3,7 +3,7 @@ import axios from "axios";
 import React from "react";
 
 
-export default class AddCityCard extends React.Component<{},{cityList:any[]}> {
+export default class AddCityCard extends React.Component<{emitter:any},{cityList:any[]}> {
   constructor(props:any){
     super(props)
     this.state = {cityList:[]
@@ -12,8 +12,19 @@ export default class AddCityCard extends React.Component<{},{cityList:any[]}> {
   async getCities():Promise<any>{
     return await axios.get(`${process.env.REACT_APP_SERVER_URL}/cities/?countryCode=FR`,{withCredentials:true})
   }
-  AddCity(){
-    alert((document.getElementById("cities-select") as any).value)
+  async AddCity(){
+    const {
+      data: { csrfToken },
+    } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/csrf`, {
+      withCredentials: true,
+    });
+
+    const choosenCityID = (document.getElementById("cities-select") as any).value
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/user/add_city`,{city:choosenCityID},{ headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "xsrf-token": csrfToken,
+    },withCredentials:true})
   }  
   async componentDidMount(
   )
