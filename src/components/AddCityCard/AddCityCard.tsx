@@ -24,7 +24,7 @@ export default class AddCityCard extends React.Component<{emitter:any},{cityList
       Accept: "application/json",
       "Content-Type": "application/json",
       "xsrf-token": csrfToken,
-    },withCredentials:true})
+    },withCredentials:true}).then(()=>{this.props.emitter.emit("addedCity",choosenCityID);})
   }  
   async componentDidMount(
   )
