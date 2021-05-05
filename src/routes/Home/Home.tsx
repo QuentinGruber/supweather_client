@@ -1,6 +1,6 @@
 import React from "react";
 import { EventEmitter } from "events";
-import { AddCityCard } from "../../components/AddCityCard/AddCityCard";
+import AddCityCard from "../../components/AddCityCard/AddCityCard";
 export default class Home extends React.Component<
   {},
   {}
