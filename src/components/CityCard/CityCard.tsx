@@ -81,7 +81,7 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
     const { data:citydata } = this.state.cityData
     return(
     <div className="CityCard">
-      <h1>{citydata?.name}</h1>
+      <h1>{citydata?.name}<button onClick={()=>{this.props.emitter.emit("removeCity",citydata.id)}}>delete</button></h1>
     </div>
     )
   }

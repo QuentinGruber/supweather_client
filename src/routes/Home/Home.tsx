@@ -19,6 +19,22 @@ export default class Home extends React.Component<
       cities.push(cityId)
       this.setState({cities:cities})
     })
+
+    this._emitter.on("removeCity",async (cityId:number)=>{
+      const cities = this.state.cities
+      cities.splice(cities.indexOf(cityId),1)
+      this.setState({cities:cities})
+       const {
+        data: { csrfToken },
+      } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/csrf`, {
+        withCredentials: true,
+      });
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/user/remove_city`,{headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "xsrf-token": csrfToken,
+      },data : {city:cityId},withCredentials:true})
+    })
   }
 
   async componentDidMount(){
