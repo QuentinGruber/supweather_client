@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { Button, InputLabel } from "@material-ui/core";
 interface RegisterFormValues {
   username: string;
   password?: string;
@@ -41,7 +42,6 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
   render() {
     return (
       <div className="RegisterForm">
-        <p>Register</p>
         <Formik
           initialValues={this._formDefaultValues}
           onSubmit={(values, actions) => {
@@ -49,28 +49,29 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
           }}
         >
           <Form>
-            <label htmlFor="username">Username</label>
+          <h3>Register</h3>
+            <InputLabel htmlFor="username">Username</InputLabel>
             <Field id="username" name="username" placeholder="John Doe" />
 
-            <label htmlFor="email">Email</label>
+            <InputLabel htmlFor="email">Email</InputLabel>
             <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
 
-            <label htmlFor="password">Password</label>
+            <InputLabel htmlFor="password">Password</InputLabel>
             <Field
               id="password"
               name="password"
               placeholder="Strong password"
             />
-            <button type="submit">Register</button>
+            <Button type="submit">Register</Button>
           </Form>
         </Formik>
-        <button
+        <Button
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}
         >
           i want to login
-        </button>
+        </Button>
       </div>
     );
   }
