@@ -45,11 +45,13 @@ export default class Home extends React.Component<
   render() {
     return (
       <div className="Home">
+        <div style={{display:"flex",justifyContent:"space-evenly"}}>
         {
           this.state.cities.map(city => {
             return <CityCard key={city} emitter={this._emitter} cityId={city}/>
           })
         }
+        </div>
         <AddCityCard emitter={this._emitter} /> 
       </div>
     );

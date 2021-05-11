@@ -16,6 +16,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
     interface Coord {
         lon: number;
         lat: number;
@@ -81,14 +84,19 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
     }
 
     
-export default class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:CityDataObject}> {
+export default class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:CityDataObject,hoverDelete:boolean}> {
   constructor(props:any){
     super(props)
-    this.state = {cityData:{} as CityDataObject}
+    this.state = {cityData:{} as CityDataObject,hoverDelete:false}
+    this.toogleDeleteState = this.toogleDeleteState.bind(this)
   }
   
   convertToDegreCelsius(tempInkalvin:number):string{
     return `${(tempInkalvin - 273.15).toFixed(1)}°`
+  }
+
+  toogleDeleteState(){
+    this.setState({hoverDelete:!this.state.hoverDelete})
   }
 
   async componentDidMount(
@@ -97,6 +105,7 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
     const {data :cityData} = await axios.get(`${process.env.REACT_APP_SERVER_URL}/weather/?cityId=${this.props.cityId}`,{withCredentials:true})
     this.setState({cityData: cityData}) 
   }
+
   render(){
     const { data:cityData } = this.state.cityData
     console.log(cityData)
@@ -106,8 +115,9 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
       <Card>
       <CardHeader
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="settings" onClick={()=>this.props.emitter.emit("removeCity",cityData.id)} onMouseLeave={this.toogleDeleteState} onMouseEnter={this.toogleDeleteState}>
+            {!this.state.hoverDelete?<DeleteIcon />:
+            <DeleteForeverIcon />}
           </IconButton>
         }
         title={cityData.name}
