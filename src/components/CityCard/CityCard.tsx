@@ -1,21 +1,7 @@
-import { Button, Card } from "@material-ui/core";
+import { Button, Card, CardActionArea } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { CardHeader, CardContent, CardActions, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
@@ -112,7 +98,7 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
     return(
       <>
       {cityData?(
-      <Card>
+      <Card style={{width:"300px"}}>
       <CardHeader
         action={
           <IconButton aria-label="settings" onClick={()=>this.props.emitter.emit("removeCity",cityData.id)} onMouseLeave={this.toogleDeleteState} onMouseEnter={this.toogleDeleteState}>
@@ -123,9 +109,10 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
         title={cityData.name}
         subheader={this.convertToDegreCelsius(cityData.main.temp)}
       />
+      <CardActionArea>
       <CardContent >
       <img
-      style={{width: "100px"}}
+      style={{width: "150px"}}
         src={process.env.PUBLIC_URL+"assets/cloudy_dark.png"}
       />
       </CardContent>
@@ -135,15 +122,13 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
         Feels Like : {this.convertToDegreCelsius(cityData.main.feels_like)}
         </Typography>
         <Typography>
-        Min : {this.convertToDegreCelsius(cityData.main.temp_max)}
+        Min : {this.convertToDegreCelsius(cityData.main.temp_min)}
         </Typography>
         <Typography>
-        Max : {this.convertToDegreCelsius(cityData.main.temp_min)}
+        Max : {this.convertToDegreCelsius(cityData.main.temp_max)}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <Button>see more</Button>
-      </CardActions>
+      </CardActionArea>
     </Card>):null}
     </>
     )

@@ -3,6 +3,7 @@ import { EventEmitter } from "events";
 import AddCityCard from "../../components/AddCityCard/AddCityCard";
 import axios from "axios";
 import CityCard from "../../components/CityCard/CityCard";
+import NavBar from "../../components/Navbar/NavBar";
 
 export default class Home extends React.Component<
   {},
@@ -45,6 +46,7 @@ export default class Home extends React.Component<
   render() {
     return (
       <div className="Home">
+        <NavBar />
         <div style={{display:"flex",justifyContent:"space-evenly"}}>
         {
           this.state.cities.map(city => {
@@ -52,7 +54,9 @@ export default class Home extends React.Component<
           })
         }
         </div>
-        <AddCityCard emitter={this._emitter} /> 
+        <div style={{display:"flex",justifyContent:"space-evenly"}}>
+          <AddCityCard emitter={this._emitter} /> 
+        </div>
       </div>
     );
   }
