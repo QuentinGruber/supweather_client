@@ -1,7 +1,21 @@
-import { render } from "@testing-library/react";
+import { Button, Card } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
-
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
     interface Coord {
         lon: number;
         lat: number;
@@ -66,11 +80,17 @@ import React from "react";
       data: CityData
     }
 
+    
 export default class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:CityDataObject}> {
   constructor(props:any){
     super(props)
     this.state = {cityData:{} as CityDataObject}
   }
+  
+  convertToDegreCelsius(tempInkalvin:number):string{
+    return `${(tempInkalvin - 273.15).toFixed(1)}°`
+  }
+
   async componentDidMount(
   )
   {
@@ -78,11 +98,44 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
     this.setState({cityData: cityData}) 
   }
   render(){
-    const { data:citydata } = this.state.cityData
+    const { data:cityData } = this.state.cityData
+    console.log(cityData)
     return(
-    <div className="CityCard">
-      <h1>{citydata?.name}<button onClick={()=>{this.props.emitter.emit("removeCity",citydata.id)}}>delete</button></h1>
-    </div>
+      <>
+      {cityData?(
+      <Card>
+      <CardHeader
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={cityData.name}
+        subheader={this.convertToDegreCelsius(cityData.main.temp)}
+      />
+      <CardContent >
+      <img
+      style={{width: "100px"}}
+        src={process.env.PUBLIC_URL+"assets/cloudy_dark.png"}
+      />
+      </CardContent>
+       <CardContent>
+        {this.convertToDegreCelsius(cityData.main.temp)}
+        <Typography>
+        Feels Like : {this.convertToDegreCelsius(cityData.main.feels_like)}
+        </Typography>
+        <Typography>
+        Min : {this.convertToDegreCelsius(cityData.main.temp_max)}
+        </Typography>
+        <Typography>
+        Max : {this.convertToDegreCelsius(cityData.main.temp_min)}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <Button>see more</Button>
+      </CardActions>
+    </Card>):null}
+    </>
     )
   }
 }
