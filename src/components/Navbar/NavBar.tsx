@@ -47,7 +47,7 @@ function NavBar() {
       justify="space-between"
       container 
     >
-    <IconButton edge="start" color="inherit" aria-label="menu">
+    <IconButton onClick={()=>goHome()} edge="start" color="inherit" aria-label="menu">
       <HomeIcon />
     </IconButton>
     <Typography variant="h6" >

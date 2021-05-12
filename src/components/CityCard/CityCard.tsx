@@ -4,6 +4,7 @@ import React from "react";
 import { CardHeader, CardContent, CardActions, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { withRouter } from "react-router-dom";
 
     interface Coord {
         lon: number;
@@ -70,7 +71,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
     }
 
     
-export default class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:CityDataObject,hoverDelete:boolean}> {
+class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:CityDataObject,hoverDelete:boolean}> {
   constructor(props:any){
     super(props)
     this.state = {cityData:{} as CityDataObject,hoverDelete:false}
@@ -83,6 +84,10 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
 
   toogleDeleteState(){
     this.setState({hoverDelete:!this.state.hoverDelete})
+  }
+
+  goToCityDetails() {
+    (this.props as any).history.push({pathname:"/detail",state:{cityData:this.state.cityData.data}});
   }
 
   async componentDidMount(
@@ -109,7 +114,7 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
         title={cityData.name}
         subheader={this.convertToDegreCelsius(cityData.main.temp)}
       />
-      <CardActionArea>
+      <CardActionArea onClick={()=>{this.goToCityDetails()}}>
       <CardContent >
       <img
       style={{width: "150px"}}
@@ -134,3 +139,5 @@ export default class CityCard extends React.Component<{emitter:any,cityId:number
     )
   }
 }
+
+export default (withRouter as any)(CityCard);
