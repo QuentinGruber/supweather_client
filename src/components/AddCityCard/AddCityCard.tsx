@@ -19,10 +19,11 @@ export default class AddCityCard extends React.Component<{emitter:any},{cityList
   }
   changeCityAdd(event:any){
     const newCity = event.target.value;
-    console.log(newCity)
     this.setState({selectedCity:newCity})
   }
   async AddCity(){
+    if(this.state.selectedCity === "default")
+      return
     const {
       data: { csrfToken },
     } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/csrf`, {
@@ -35,6 +36,7 @@ export default class AddCityCard extends React.Component<{emitter:any},{cityList
       "Content-Type": "application/json",
       "xsrf-token": csrfToken,
     },withCredentials:true}).then(()=>{this.props.emitter.emit("addedCity",choosenCityID);})
+    this.setState({selectedCity:"default"})
   }  
   async componentDidMount(
   )

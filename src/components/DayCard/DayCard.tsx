@@ -11,6 +11,14 @@ function convertToDegreCelsius(tempInkalvin:number):string{
   return `${(tempInkalvin - 273.15).toFixed(1)}°`
 };
 
+function convertUnixTohoursMinutes(unixTime:number):string{
+  const date = new Date (unixTime)
+  console.log(date)
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  return `${hours}:${minutes}`
+}
+
 export default function DayCard(props:DayCardProps){
     console.log(props.dailyData)
     const { wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
@@ -35,7 +43,19 @@ export default function DayCard(props:DayCardProps){
       Day : {convertToDegreCelsius(dayTemp)} Feels Like : {convertToDegreCelsius(dayFeelsLike)}
       </Typography>
       <Typography>
-      Pressure : {pressure} Humidity : {humidity} Wind :{wind} Sunrise: {sunrise} Sunset: {sunset}
+      Pressure : {pressure}
+      </Typography>
+      <Typography>
+      Humidity : {humidity}
+      </Typography>
+      <Typography>
+        Wind :{wind}
+      </Typography>
+      <Typography>
+        Sunrise: {convertUnixTohoursMinutes(sunrise)}
+      </Typography>
+      <Typography>
+        Sunset: {convertUnixTohoursMinutes(sunset)}
       </Typography>
       <Typography>
       Rain : {rain}mm

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { EventEmitter } from "events";
 import AddCityCard from "../../components/AddCityCard/AddCityCard";
 import axios from "axios";
-import CityCard from "../../components/CityCard/CityCard";
 import NavBar from "../../components/Navbar/NavBar";
+import Loader from "react-loader-spinner";
+const CityCard = React.lazy(() => import('../../components/CityCard/CityCard'));
 
 export default class Home extends React.Component<
   {},
@@ -19,7 +20,6 @@ export default class Home extends React.Component<
       const cities = this.state.cities
       cities.push(cityId)
       this.setState({cities:cities})
-      this.fetchCities()
     })
 
     this._emitter.on("removeCity",async (cityId:number)=>{
@@ -36,7 +36,6 @@ export default class Home extends React.Component<
         "Content-Type": "application/json",
         "xsrf-token": csrfToken,
       },data : {city:cityId},withCredentials:true})
-      this.fetchCities()
     })
   }
 
@@ -58,7 +57,12 @@ export default class Home extends React.Component<
         <div className="wrapper">
         {
           this.state.cities.map(city => {
-            return <div className="item" ><CityCard key={city} emitter={this._emitter} cityId={city}/></div>
+            return <div className="item" > <Suspense fallback={ <Loader
+              type="Oval"
+              color="#3f51b5"
+              height={50}
+              width={100}
+            />}><CityCard key={city} emitter={this._emitter} cityId={city}/></Suspense></div>
           })
         }
         </div>

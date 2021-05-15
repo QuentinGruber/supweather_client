@@ -1,7 +1,8 @@
 import axios from "axios"
-import React, { useEffect, useState } from "react"
-import DayCard from "../DayCard/DayCard";
+import React, { Suspense, useEffect, useState } from "react"
 import "./DayListStyles.css"
+import Loader from "react-loader-spinner";
+const DayCard = React.lazy(() => import("../DayCard/DayCard"));
 interface DayListProps {
     cityData:any;
     cnt:number;
@@ -21,9 +22,19 @@ export default function DayList(props:DayListProps){
     return(
         <div className="wrapper">
         {daily? (daily as any).data.daily.map((day:any) => {
-            return <div className="item"><DayCard dailyData={day} key={Math.random()} /></div>
+            return <div className="item"><Suspense fallback={<Loader
+                type="Oval"
+                color="#3f51b5"
+                height={50}
+                width={100}
+              />}><DayCard dailyData={day} key={Math.random()} /></Suspense></div>
         })
-        :<p>no definito</p>}
+        :<Loader
+        type="Oval"
+        color="#3f51b5"
+        height={100}
+        width={100}
+      />}
         </div>
     )
 }
