@@ -23,7 +23,7 @@ export default function DayCard(props:DayCardProps){
     style={{width: "150px"}}
       src={process.env.PUBLIC_URL+"assets/cloudy_dark.png"}
     />
-    <h6>{weatherDescription}</h6>
+    <h2>{weatherDescription}</h2>
     </CardContent>
      <CardContent>
      <Typography>

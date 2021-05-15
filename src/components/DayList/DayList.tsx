@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import DayCard from "../DayCard/DayCard";
-
+import "./DayListStyles.css"
 interface DayListProps {
     cityData:any;
     cnt:number;
@@ -19,11 +19,11 @@ export default function DayList(props:DayListProps){
     },[])
    
     return(
-        <>
+        <div className="wrapper">
         {daily? (daily as any).data.daily.map((day:any) => {
-            return <DayCard dailyData={day} key={Math.random()} />
+            return <div className="item"><DayCard dailyData={day} key={Math.random()} /></div>
         })
         :<p>no definito</p>}
-        </>
+        </div>
     )
 }
