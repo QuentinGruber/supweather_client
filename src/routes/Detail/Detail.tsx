@@ -8,11 +8,11 @@ import DayList from "../../components/DayList/DayList";
 function Detail(props:any) {
   const location = useLocation();
   const { cityData } = location.state as any
-
+  console.warn(cityData)
   return( 
   <div className="Detail">
     <NavBar />
-    <DayList cityData={cityData} cnt={2} />
+    <DayList cityData={cityData} cityName={cityData.name} cnt={2} />
   </div>)
 }
 

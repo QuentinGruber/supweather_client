@@ -5,10 +5,11 @@ import { getAssociatedImage } from "../../utils/utils";
 
 interface DayCardProps {
     dailyData:any;
+    date:any
 }
 
 function convertToDegreCelsius(tempInkalvin:number):string{
-  return `${(tempInkalvin - 273.15).toFixed(1)}°`
+  return `${(tempInkalvin - 273.15).toFixed(1)}°C`
 };
 
 function convertUnixTohoursMinutes(unixTime:number):string{
@@ -20,13 +21,12 @@ function convertUnixTohoursMinutes(unixTime:number):string{
 }
 
 export default function DayCard(props:DayCardProps){
-    console.log(props.dailyData)
     const { wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
     const weatherDescription = props.dailyData.weather[0].description
     const iconId = props.dailyData.weather[0].icon
     return( <Card style={{width:"300px"}}>
     <CardHeader
-      title={"DATE"}
+      title={props.date}
     />
     <CardContent >
     <img
@@ -43,13 +43,13 @@ export default function DayCard(props:DayCardProps){
       Day : {convertToDegreCelsius(dayTemp)} Feels Like : {convertToDegreCelsius(dayFeelsLike)}
       </Typography>
       <Typography>
-      Pressure : {pressure}
+      Pressure : {pressure} hPA
       </Typography>
       <Typography>
-      Humidity : {humidity}
+      Humidity : {humidity} %
       </Typography>
       <Typography>
-        Wind :{wind}
+        Wind :{wind} km/h
       </Typography>
       <Typography>
         Sunrise: {convertUnixTohoursMinutes(sunrise)}

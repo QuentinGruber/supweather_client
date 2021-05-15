@@ -79,7 +79,7 @@ class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:Cit
   }
   
   convertToDegreCelsius(tempInkalvin:number):string{
-    return `${(tempInkalvin - 273.15).toFixed(1)}°`
+    return `${(tempInkalvin - 273.15).toFixed(1)}°C`
   }
 
   toogleDeleteState(){
