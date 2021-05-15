@@ -6,6 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withRouter } from "react-router-dom";
 import { getAssociatedImage } from "../../utils/utils"
+import Loader from "react-loader-spinner";
     interface Coord {
         lon: number;
         lat: number;
@@ -134,7 +135,12 @@ class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:Cit
         </Typography>
       </CardContent>
       </CardActionArea>
-    </Card>):null}
+    </Card>):<Loader
+        type="Oval"
+        color="#3f51b5"
+        height={100}
+        width={100}
+      />}
     </>
     )
   }

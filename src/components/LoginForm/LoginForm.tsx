@@ -2,6 +2,8 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { Button, Card, CardHeader, InputLabel } from "@material-ui/core";
+
 interface LoginFormValues {
   email: string;
   password?: string;
@@ -40,8 +42,8 @@ class LoginForm extends React.Component<{ emitter: any }, {}> {
   }
   render() {
     return (
-      <div className="RegisterForm">
-        <p>Login</p>
+      <Card className="RegisterForm">
+                <div className="Formik">
         <Formik
           initialValues={this._formDefaultValues}
           onSubmit={(values, actions) => {
@@ -49,26 +51,38 @@ class LoginForm extends React.Component<{ emitter: any }, {}> {
           }}
         >
           <Form>
-            <label htmlFor="email">Email</label>
-            <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
+          <CardHeader title={"Login"} />
+          <div className="formField">
 
-            <label htmlFor="password">Password</label>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
+            </div>
+
+            <div className="formField">
+
+            <InputLabel htmlFor="password">Password</InputLabel>
             <Field
               id="password"
               name="password"
               placeholder="Strong password"
             />
-            <button type="submit">Login</button>
+               </div>
+            <Button className="submitButton"
+ type="submit" variant="contained" color="primary">Login</Button>
           </Form>
         </Formik>
-        <button
+        </div>
+
+        <Button
+        className="submitButton"
+        variant="outlined" color="secondary"
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}
         >
           i want to register
-        </button>
-      </div>
+        </Button>
+      </Card>
     );
   }
 }

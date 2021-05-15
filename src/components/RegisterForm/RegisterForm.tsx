@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import { Button, InputLabel } from "@material-ui/core";
+import { Button, Card, CardHeader, InputLabel } from "@material-ui/core";
 interface RegisterFormValues {
   username: string;
   password?: string;
@@ -41,7 +41,8 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
   }
   render() {
     return (
-      <div className="RegisterForm">
+      <Card className="RegisterForm">
+        <div className="Formik">
         <Formik
           initialValues={this._formDefaultValues}
           onSubmit={(values, actions) => {
@@ -49,12 +50,18 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
           }}
         >
           <Form>
-          <h3>Register</h3>
+          <CardHeader title={"Register"} />
+          <div className="formField">
             <InputLabel htmlFor="username">Username</InputLabel>
             <Field id="username" name="username" placeholder="John Doe" />
+          </div>
+          <div className="formField">
 
             <InputLabel htmlFor="email">Email</InputLabel>
             <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
+            </div>
+
+            <div className="formField">
 
             <InputLabel htmlFor="password">Password</InputLabel>
             <Field
@@ -62,17 +69,23 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
               name="password"
               placeholder="Strong password"
             />
-            <Button type="submit">Register</Button>
+                      </div>
+
+            <Button         className="submitButton"
+ type="submit" variant="contained" color="primary">Register</Button>
           </Form>
         </Formik>
+        </div>
         <Button
+        className="submitButton"
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}
+          variant="outlined" color="secondary"
         >
           i want to login
         </Button>
-      </div>
+      </Card>
     );
   }
 }
