@@ -1,5 +1,6 @@
 import React from "react"
 import { Card, CardHeader, CardContent, CardActions, IconButton, Typography } from '@material-ui/core';
+import { getAssociatedImage } from "../../utils/utils";
 
 
 interface DayCardProps {
@@ -14,6 +15,7 @@ export default function DayCard(props:DayCardProps){
     console.log(props.dailyData)
     const { wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
     const weatherDescription = props.dailyData.weather[0].description
+    const iconId = props.dailyData.weather[0].icon
     return( <Card style={{width:"300px"}}>
     <CardHeader
       title={"DATE"}
@@ -21,7 +23,7 @@ export default function DayCard(props:DayCardProps){
     <CardContent >
     <img
     style={{width: "150px"}}
-      src={process.env.PUBLIC_URL+"assets/cloudy_dark.png"}
+    src={`${process.env.PUBLIC_URL}assets/${getAssociatedImage(iconId)}`}
     />
     <h2>{weatherDescription}</h2>
     </CardContent>
