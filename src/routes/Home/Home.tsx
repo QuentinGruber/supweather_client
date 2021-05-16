@@ -8,18 +8,22 @@ const CityCard = React.lazy(() => import('../../components/CityCard/CityCard'));
 
 export default class Home extends React.Component<
   {},
-  {cities:any[]}
+  {cities:any[],darkTheme:boolean}
 > {
   _emitter: any;
   constructor(props: any) {
     super(props);
     this._emitter = new EventEmitter();
-    this.state = { cities: [] };
+    this.state = { cities: [] ,darkTheme:false};
 
     this._emitter.on("addedCity",(cityId:number)=>{
       const cities = this.state.cities
       cities.push(cityId)
       this.setState({cities:cities})
+    })
+
+    this._emitter.on("changeTheme",(darkTheme:boolean)=>{
+      this.setState({darkTheme:darkTheme})
     })
 
     this._emitter.on("removeCity",async (cityId:number)=>{
@@ -50,7 +54,7 @@ export default class Home extends React.Component<
   render() {
     return (
       <div className="Home">
-        <NavBar />
+        <NavBar emitter={this._emitter} />
         <div style={{display:"flex",justifyContent:"space-evenly",margin:"25px"}}>
           <AddCityCard emitter={this._emitter} /> 
         </div>

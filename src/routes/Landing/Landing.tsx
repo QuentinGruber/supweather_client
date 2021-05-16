@@ -3,6 +3,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
 import { EventEmitter } from "events";
 import "./LandingStyles.css"
+import NavBar from "../../components/Navbar/NavBar";
 export default class Landing extends React.Component<
   {},
   { displayRegisterForm: boolean }
@@ -19,7 +20,7 @@ export default class Landing extends React.Component<
   render() {
     return (
       <div className="Landing">
-        <h1>Supweather</h1>
+        <NavBar landingMode={true} emitter={this._emitter} />
         <div className="AuthForm">
         {this.state.displayRegisterForm ? (
           <RegisterForm emitter={this._emitter} />

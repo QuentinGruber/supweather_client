@@ -9,7 +9,12 @@ import { withRouter, useHistory  } from "react-router-dom";
 import HomeIcon from '@material-ui/icons/Home';
 import axios from "axios";
 
-function NavBar() {
+interface NavBarProps {
+  landingMode?:boolean;
+  emitter:any;
+}
+
+function NavBar(props:NavBarProps) {
   const history = useHistory();
   const [nightTheme, setNightTheme] = useState(localStorage.getItem("nightTheme")?(localStorage.getItem("nightTheme") === "true"):false)
   function goHome(){
@@ -38,7 +43,7 @@ function NavBar() {
       alert(`${e.response?.data.error}`);
     }
   }
-    
+    const { landingMode } = props;
 
   return (
   <AppBar position="static">
@@ -47,9 +52,10 @@ function NavBar() {
       justify="space-between"
       container 
     >
+     { landingMode?null:
     <IconButton onClick={()=>goHome()} edge="start" color="inherit" aria-label="menu">
       <HomeIcon />
-    </IconButton>
+    </IconButton>}
     <Typography variant="h6" >
       Supweather
     </Typography>
@@ -59,13 +65,14 @@ function NavBar() {
         checked={nightTheme}
         onChange={()=>{
           localStorage.setItem("nightTheme",String(!nightTheme))
+          props.emitter.emit("changeTheme",!nightTheme);
           setNightTheme(!nightTheme)
         }}
         color="secondary"
         name="checkedB"
         inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
-    <Button onClick={disconnect} color="inherit">Disconnect</Button>
+      />{landingMode ?null:
+    <Button onClick={disconnect} color="inherit">Disconnect</Button>}
     </div>
     </Grid>
   </Toolbar>
