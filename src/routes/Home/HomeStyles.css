@@ -8,3 +8,12 @@
 .item {
   margin: 20px;
 }
+
+body {
+  height: 100%;
+  background-color: #74a5ff;
+}
+
+.cityName {
+  color: #004781;
+}

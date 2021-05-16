@@ -20,5 +20,10 @@
 }
 
 .Formik {
-  margin-left: 30%;
+  text-align: center;
+}
+
+.Landing {
+  height: 100%;
+  background-color: #74a5ff;
 }

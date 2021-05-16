@@ -21,7 +21,7 @@ function convertUnixTohoursMinutes(unixTime:number):string{
 }
 
 export default function DayCard(props:DayCardProps){
-    const { wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
+    const { dt:dateTime, wind_deg:deg, wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
     const weatherDescription = props.dailyData.weather[0].description
     const iconId = props.dailyData.weather[0].icon
     return( <Card style={{width:"300px"}}>
@@ -49,13 +49,16 @@ export default function DayCard(props:DayCardProps){
       Humidity : {humidity} %
       </Typography>
       <Typography>
-        Wind :{wind} km/h
+        Orientation : {deg}°
       </Typography>
       <Typography>
-        Sunrise: {convertUnixTohoursMinutes(sunrise)}
+        Wind : {wind} km/h
       </Typography>
       <Typography>
-        Sunset: {convertUnixTohoursMinutes(sunset)}
+        Sunrise : {convertUnixTohoursMinutes(sunrise)}
+      </Typography>
+      <Typography>
+        Sunset : {convertUnixTohoursMinutes(sunset)}
       </Typography>
       <Typography>
       Rain : {rain}mm

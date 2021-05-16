@@ -4,17 +4,17 @@ import AddCityCard from "../../components/AddCityCard/AddCityCard";
 import axios from "axios";
 import NavBar from "../../components/Navbar/NavBar";
 import Loader from "react-loader-spinner";
+import "./HomeStyles.css";
 const CityCard = React.lazy(() => import('../../components/CityCard/CityCard'));
-
 export default class Home extends React.Component<
   {},
-  {cities:any[],darkTheme:boolean}
+  {cities:any[],darkTheme:boolean,bgSize?:number}
 > {
   _emitter: any;
   constructor(props: any) {
     super(props);
     this._emitter = new EventEmitter();
-    this.state = { cities: [] ,darkTheme:false};
+    this.state = { cities: [] ,darkTheme:false, bgSize : 100};
 
     this._emitter.on("addedCity",(cityId:number)=>{
       const cities = this.state.cities

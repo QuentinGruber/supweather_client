@@ -81,7 +81,7 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}
-          variant="outlined" color="secondary"
+          variant="outlined" color="primary"
         >
           i want to login
         </Button>

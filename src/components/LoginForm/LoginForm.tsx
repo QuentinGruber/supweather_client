@@ -75,7 +75,7 @@ class LoginForm extends React.Component<{ emitter: any }, {}> {
 
         <Button
         className="submitButton"
-        variant="outlined" color="secondary"
+        variant="outlined" color="primary"
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}

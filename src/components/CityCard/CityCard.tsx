@@ -100,7 +100,6 @@ class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:Cit
 
   render(){
     const { data:cityData } = this.state.cityData
-    console.log(cityData)
     return(
       <>
       {cityData?(
@@ -123,7 +122,6 @@ class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:Cit
       />
       </CardContent>
        <CardContent>
-        {this.convertToDegreCelsius(cityData.main.temp)}
         <Typography>
         Feels Like : {this.convertToDegreCelsius(cityData.main.feels_like)}
         </Typography>

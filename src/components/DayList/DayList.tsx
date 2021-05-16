@@ -99,7 +99,8 @@ export default function DayList(props:DayListProps){
    
     return(
         <>
-        <h1>{props.cityName}</h1>
+        <h1  className="cityName"
+>{props.cityName}</h1>
         <div className="wrapper">
         {daily? (daily as any).data.daily.map((day:any,index:number) => {
             return <div className="item"><Suspense fallback={<Loader
