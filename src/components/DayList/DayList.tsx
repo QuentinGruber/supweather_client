@@ -75,8 +75,6 @@ function generateDates() {
     Dates.push(generateDateText(new Date(Date.now() + idk)));
     idk += dayInMillis;
   }
-  console.log("DAAAAAAAAAAAATES");
-  console.log(Dates);
   return Dates;
 }
 
@@ -91,7 +89,6 @@ export default function DayList(props: DayListProps) {
         { withCredentials: true }
       )
       .then((cityData) => {
-        console.log(cityData);
         setDaily(cityData.data);
       });
   }, [lat, lon]);

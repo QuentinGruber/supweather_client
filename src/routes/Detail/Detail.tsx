@@ -6,7 +6,6 @@ import DayList from "../../components/DayList/DayList";
 function Detail(props: any) {
   const location = useLocation();
   const { cityData } = location.state as any;
-  console.warn(cityData);
   return (
     <div className="Detail">
       <NavBar />

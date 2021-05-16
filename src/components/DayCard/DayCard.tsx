@@ -13,7 +13,6 @@ function convertToDegreCelsius(tempInkalvin: number): string {
 
 function convertUnixTohoursMinutes(unixTime: number): string {
   const date = new Date(unixTime);
-  console.log(date);
   const hours = date.getHours();
   const minutes = date.getMinutes();
   return `${hours}:${minutes}`;

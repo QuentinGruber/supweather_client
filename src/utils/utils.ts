@@ -1,7 +1,6 @@
 export function getAssociatedImage(meteoIcon: string) {
   const light: boolean = meteoIcon[meteoIcon.length] === "d";
   const iconId = meteoIcon.slice(0, -1);
-  console.log(iconId);
   switch (iconId) {
     case "01":
       return `sunny_${light ? "light" : "dark"}.png`;
