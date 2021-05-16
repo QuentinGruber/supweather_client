@@ -43,39 +43,48 @@ class LoginForm extends React.Component<{ emitter: any }, {}> {
   render() {
     return (
       <Card className="RegisterForm">
-                <div className="Formik">
-        <Formik
-          initialValues={this._formDefaultValues}
-          onSubmit={(values, actions) => {
-            this.onLoginFormSubmit(values, actions);
-          }}
-        >
-          <Form>
-          <CardHeader title={"Login"} />
-          <div className="formField">
+        <div className="Formik">
+          <Formik
+            initialValues={this._formDefaultValues}
+            onSubmit={(values, actions) => {
+              this.onLoginFormSubmit(values, actions);
+            }}
+          >
+            <Form>
+              <CardHeader title={"Login"} />
+              <div className="formField">
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <Field
+                  id="email"
+                  name="email"
+                  placeholder="JohnDoe@gmail.com"
+                />
+              </div>
 
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
-            </div>
-
-            <div className="formField">
-
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Field
-              id="password"
-              name="password"
-              placeholder="Strong password"
-            />
-               </div>
-            <Button className="submitButton"
- type="submit" variant="contained" color="primary">Login</Button>
-          </Form>
-        </Formik>
+              <div className="formField">
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Field
+                  id="password"
+                  name="password"
+                  placeholder="Strong password"
+                />
+              </div>
+              <Button
+                className="submitButton"
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Login
+              </Button>
+            </Form>
+          </Formik>
         </div>
 
         <Button
-        className="submitButton"
-        variant="outlined" color="primary"
+          className="submitButton"
+          variant="outlined"
+          color="primary"
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}

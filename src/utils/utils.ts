@@ -1,7 +1,7 @@
 export function getAssociatedImage(meteoIcon: string) {
   const light: boolean = meteoIcon[meteoIcon.length] === "d";
-  const iconId = meteoIcon.slice(0, -1)
-  console.log(iconId)
+  const iconId = meteoIcon.slice(0, -1);
+  console.log(iconId);
   switch (iconId) {
     case "01":
       return `sunny_${light ? "light" : "dark"}.png`;
@@ -22,6 +22,6 @@ export function getAssociatedImage(meteoIcon: string) {
     case "50":
       return `storm_${light ? "light" : "dark"}.png`; // I know it's "mist" but we don't have any assets for that sadly...
     default:
-       return `cloudy_${light ? "light" : "dark"}.png`;
+      return `cloudy_${light ? "light" : "dark"}.png`;
   }
 }

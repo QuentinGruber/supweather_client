@@ -3,16 +3,16 @@ import NavBar from "../../components/Navbar/NavBar";
 import { useLocation } from "react-router-dom";
 import DayList from "../../components/DayList/DayList";
 
-
-function Detail(props:any) {
+function Detail(props: any) {
   const location = useLocation();
-  const { cityData } = location.state as any
-  console.warn(cityData)
-  return( 
-  <div className="Detail">
-    <NavBar />
-    <DayList cityData={cityData} cityName={cityData.name} cnt={2} />
-  </div>)
+  const { cityData } = location.state as any;
+  console.warn(cityData);
+  return (
+    <div className="Detail">
+      <NavBar />
+      <DayList cityData={cityData} cityName={cityData.name} cnt={2} />
+    </div>
+  );
 }
 
 export default Detail;

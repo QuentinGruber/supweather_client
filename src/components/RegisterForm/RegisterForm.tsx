@@ -43,45 +43,54 @@ class RegisterForm extends React.Component<{ emitter: any }, {}> {
     return (
       <Card className="RegisterForm">
         <div className="Formik">
-        <Formik
-          initialValues={this._formDefaultValues}
-          onSubmit={(values, actions) => {
-            this.onRegisterFormSubmit(values, actions);
-          }}
-        >
-          <Form>
-          <CardHeader title={"Register"} />
-          <div className="formField">
-            <InputLabel htmlFor="username">Username</InputLabel>
-            <Field id="username" name="username" placeholder="John Doe" />
-          </div>
-          <div className="formField">
+          <Formik
+            initialValues={this._formDefaultValues}
+            onSubmit={(values, actions) => {
+              this.onRegisterFormSubmit(values, actions);
+            }}
+          >
+            <Form>
+              <CardHeader title={"Register"} />
+              <div className="formField">
+                <InputLabel htmlFor="username">Username</InputLabel>
+                <Field id="username" name="username" placeholder="John Doe" />
+              </div>
+              <div className="formField">
+                <InputLabel htmlFor="email">Email</InputLabel>
+                <Field
+                  id="email"
+                  name="email"
+                  placeholder="JohnDoe@gmail.com"
+                />
+              </div>
 
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Field id="email" name="email" placeholder="JohnDoe@gmail.com" />
-            </div>
+              <div className="formField">
+                <InputLabel htmlFor="password">Password</InputLabel>
+                <Field
+                  id="password"
+                  name="password"
+                  placeholder="Strong password"
+                />
+              </div>
 
-            <div className="formField">
-
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Field
-              id="password"
-              name="password"
-              placeholder="Strong password"
-            />
-                      </div>
-
-            <Button         className="submitButton"
- type="submit" variant="contained" color="primary">Register</Button>
-          </Form>
-        </Formik>
+              <Button
+                className="submitButton"
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                Register
+              </Button>
+            </Form>
+          </Formik>
         </div>
         <Button
-        className="submitButton"
+          className="submitButton"
           onClick={() => {
             this.props.emitter.emit("toogleAuthForm");
           }}
-          variant="outlined" color="primary"
+          variant="outlined"
+          color="primary"
         >
           i want to login
         </Button>
