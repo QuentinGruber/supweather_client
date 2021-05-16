@@ -1,5 +1,5 @@
 import React from "react"
-import { Card, CardHeader, CardContent, CardActions, IconButton, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import { getAssociatedImage } from "../../utils/utils";
 
 
@@ -21,7 +21,7 @@ function convertUnixTohoursMinutes(unixTime:number):string{
 }
 
 export default function DayCard(props:DayCardProps){
-    const { dt:dateTime, wind_deg:deg, wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
+    const { wind_deg:deg, wind_speed:wind, humidity , rain , pressure , sunrise , sunset , temp:{day:dayTemp, morn:mornTemp}, feels_like:{day:dayFeelsLike, morn:mornFeelsLike}} = props.dailyData
     const weatherDescription = props.dailyData.weather[0].description
     const iconId = props.dailyData.weather[0].icon
     return( <Card style={{width:"300px"}}>
@@ -30,6 +30,7 @@ export default function DayCard(props:DayCardProps){
     />
     <CardContent >
     <img
+    alt={"weather icon"}
     style={{width: "150px"}}
     src={`${process.env.PUBLIC_URL}assets/${getAssociatedImage(iconId)}`}
     />

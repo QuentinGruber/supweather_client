@@ -18,15 +18,13 @@ function getUtcDayString(dayId:number):string{
             case 2:    
             return "Tuesday"
             case 3:    
-            return "Wenesday";
+            return "Wednesday";
             case 4:    
             return "Tuesday";
             case 5:    
             return "Friday";
             case 6:    
             return "Saturday";
-            case 7:    
-            return "Sunday";
         default:
             return "unknown"
     }
@@ -73,7 +71,6 @@ function generateDateText(date:Date):string{
 }
 function generateDates() {
     const Dates = []
-    const currentDate = new Date(Date.now())
     const dayInMillis = 24 * 3600 * 1000
     let idk = 0;
     for (let index = 0; index < 8; index++) {
@@ -95,7 +92,7 @@ export default function DayList(props:DayListProps){
              console.log(cityData)
              setDaily(cityData.data)
             })
-    },[])
+    },[lat,lon])
    
     return(
         <>

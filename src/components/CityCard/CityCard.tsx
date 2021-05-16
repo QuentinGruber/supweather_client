@@ -1,7 +1,7 @@
-import { Button, Card, CardActionArea } from "@material-ui/core";
+import { Card, CardActionArea } from "@material-ui/core";
 import axios from "axios";
 import React from "react";
-import { CardHeader, CardContent, CardActions, IconButton, Typography } from '@material-ui/core';
+import { CardHeader, CardContent, IconButton, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { withRouter } from "react-router-dom";
@@ -117,6 +117,7 @@ class CityCard extends React.Component<{emitter:any,cityId:number},{cityData:Cit
       <CardActionArea onClick={()=>{this.goToCityDetails()}}>
       <CardContent >
       <img
+      alt={"weather icon"}
       style={{width: "150px"}}
         src={`${process.env.PUBLIC_URL}assets/${getAssociatedImage(cityData.weather[0].icon)}`}
       />
