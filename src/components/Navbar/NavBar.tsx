@@ -43,7 +43,7 @@ function NavBar(props: NavBarProps) {
         }
       );
       history.push("/");
-    } catch (e) {
+    } catch (e:any) {
       alert(`${e.response?.data.error}`);
     }
   }

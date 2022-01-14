@@ -36,7 +36,7 @@ class LoginForm extends React.Component<{ emitter: any }, {}> {
         }
       );
       (this.props as any).history.push("/home");
-    } catch (e) {
+    } catch (e:any) {
       alert(`${e.response.data.error}`);
     }
   }
